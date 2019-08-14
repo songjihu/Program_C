@@ -6,6 +6,17 @@
 
 int main()
 {
+	void output(); //输出函数
+	void input();  //输入函数
+	void process_number(); //例子:处理一串数字
+
+	//output();
+	input();
+	system("pause");
+}
+
+void output()
+{
 	//输出函数
 	printf("输出函数如下---------\n");
 	//double a = 9.892132; double b = 8.136732; double f = 6.345522;
@@ -18,10 +29,34 @@ int main()
 	char s = 's'; char str[10] = "ABCD";
 	printf("输出单个字符:%c\n", s);//输出单个字符
 	printf("输出字符串：%s\n", str);//输出字符串
-	system("pause");
 }
 
+void input()
+{
+	int t;
+	//输入函数 
+	printf("输入函数如下---------\n");
 
+	char str[100];//字符串
+	t = scanf("%s", &str);//跳过空格(空格即结束),Enter和Tab结束
+	printf("输入1:%s\n", str);
+
+
+	char str2[100];//字符串
+	gets_s(str2); gets_s(str2);//能接收空格，回车则结束
+	printf("输入2:%s\n", str2);
+
+	char c;//字符
+	c=getchar();//接收单个字符
+	printf("输入3:%c\n", c);
+
+	return;
+}
+
+void process_number()
+{
+	return;
+}
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
