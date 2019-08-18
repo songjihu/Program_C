@@ -3,15 +3,23 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
 
 int main()
 {
 	void output(); //输出函数
 	void input();  //输入函数
-	void process_number(); //例子:处理一串数字
+	void process_number_e(); //例子:处理一串数字
+	void process_string_e();//例子:处理字符串
+	void m_and_f();//申请和释放空间
+	void about_math();//数学相关函数
+	//ASCII 0-48 A-65 a-97
+	void about_struct();//结构体相关定义
 
-	//output();
-	input();
+	//output();input();process_number_e();process_string_e();m_and_f();about_struct();
+
+
 	system("pause");
 }
 
@@ -53,8 +61,60 @@ void input()
 	return;
 }
 
-void process_number()
+void process_number_e()
 {
+	int a[4], i, j;
+	for (i = 0; i < 4; i++) {
+		scanf("%d", &a[i]);
+	}
+	for (j = 0; j < 4; j++) {
+		printf("%d", a[j]);
+	}
+	return;
+}
+
+void process_string_e() {
+	
+	char str[20] ="\0" ;
+	printf("请输入字符串：\n");
+	gets_s(str);
+	printf("%s\n", str);
+	return;
+}
+
+void m_and_f() {
+	int *p = (int*)malloc(sizeof(int));
+	free(p);
+	return;
+}
+
+void about_math() {
+	double sin(double x);//x的正弦值
+	double cos(double x);//x的余弦值
+	double tan(double x);//x的正切值
+
+	double exp(double x);//e的x次方
+	double pow(double x, double y);//x的y次方
+	double sqrt(double x);//x的开方
+	double log(double x);//log e x
+	double log10(double x);//log 10 x
+
+	double fabs(double x);//|x| x的绝对值
+
+	return;
+}
+
+void about_struct() {
+	struct Date
+	{
+		int month;
+		int day;
+		int year;
+	}a,b;//方法1：定义结构体后并创建2个结构体变量a和b
+	a.day = 11;
+	Date c;//方法2：直接定义
+	c.day = 10;
+	printf("%d %d", a.day,c.day);
 	return;
 }
 
