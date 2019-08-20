@@ -16,8 +16,20 @@ int main()
 	void about_math();//数学相关函数
 	//ASCII 0-48 A-65 a-97
 	void about_struct();//结构体相关定义
+	void about_struct_e();//结构体例子
 
-	//output();input();process_number_e();process_string_e();m_and_f();about_struct();
+	//----常用小算法----
+	void find_prime();//*寻找素数
+	void prime_factorization();//**分解质因数
+	void approximate_number();//**约数
+	void statistical_number();//统计字母和数字出现个数
+	void positive_number();//统计正整数出现个数
+	void divide_number();//以进制分解数字
+	void b_and_s();//**求最大公约数和最小公倍数
+	void bubble_sort();//*冒泡排序
+
+	
+	
 
 
 	system("pause");
@@ -65,7 +77,7 @@ void process_number_e()
 {
 	int a[4], i, j;
 	for (i = 0; i < 4; i++) {
-		scanf("%d", &a[i]);
+		int t=scanf("%d", &a[i]);
 	}
 	for (j = 0; j < 4; j++) {
 		printf("%d", a[j]);
@@ -115,6 +127,196 @@ void about_struct() {
 	Date c;//方法2：直接定义
 	c.day = 10;
 	printf("%d %d", a.day,c.day);
+	return;
+}
+
+void about_struct_e() {
+	struct Student
+	{
+		int num;
+		char name[20];
+		float score;
+	};
+
+	struct Student stu[5] = { {10101,"zhang",78},{10102,"wang",99.9},{10103,"CCC",68.5},{10104,"DDD",76},{10105,"EEE",98} };
+	struct Student temp;
+	int n = 5;
+	int i, j;
+	for (i = 0; i < n - 1; i++)
+	{
+		for (j = i + 1; j < n; j++) {
+			if (stu[j].score > stu[i].score) {
+				temp = stu[j];
+				stu[j] = stu[i];
+				stu[i] = temp;
+			}
+		}
+	}
+	for (i = 0; i < n; i++) {
+		printf("%s %f\n", stu[i].name, stu[i].score);
+	}
+
+	return;
+}
+
+void find_prime() {
+	//100以内
+	int i, j;
+	int length = 100;
+	int count=0;
+	for (i = 2; i < length; i++)
+	{
+		for (j = 2; j <= i; j++) {
+			if (i % j == 0) {
+				break;//能被整除则跳出
+			}
+		}
+		if (i == j) {
+			count++;
+			printf("%d:%d\n",count, i);
+		}
+	}
+	return;
+}
+
+void prime_factorization() {
+
+	int i, j;
+	int n = 5446547;
+	int k = n;
+	for (i = 2; i <= n; i++) {
+		while (n!=i)
+		{
+			if (n % i == 0) {
+				printf("%d*", i);
+				n = n / i;
+			}
+			else
+			{
+				break;
+			}
+		}
+		
+	}
+	printf("%d=%d\n", n, k);
+	return;
+}
+
+void approximate_number() {
+
+	int i;
+	int n = 512;
+	for (i = 2; i < n; i++) {
+		if (n % i == 0) {
+			printf("%d\n", i);
+		}
+	}
+	return;
+}
+
+void statistical_number() {
+
+	char ch;
+	int digit=0, upper=0, lower=0;
+	ch = getchar();
+	while (ch!='\n')
+	{
+		if (ch >= '0' && ch <= '9') {
+			digit++;
+		}
+		else
+		{
+			if (ch >= 'A' && ch <= 'Z') {
+				upper++;
+			}
+			else
+			{
+				if (ch >= 'a' && ch <= 'z') {
+					lower++;
+				}
+			}
+		}
+		ch = getchar();
+	}
+	printf(" digit=%d\n upper=%d\n lower=%d\n", digit, upper, lower);
+	return;
+}
+
+void positive_number() {
+
+	int a[20] = { 2,4,3,2,4,2,1,1,2,3,1,2,3,1,3,1,1 };
+	int b[10] = { 0 };
+	int i;
+	for (i = 0; i < 20; i++) {
+		b[a[i]]++;
+	}
+	for (i = 0; i < 10; i++) {
+		printf("%d次数:%d\n", i, b[i]);
+	}
+	return;
+}
+
+void divide_number() {
+
+	int n = 123456;
+	int k = 10;//进制or位数
+	int b[10] = { 0 };
+	int i = 0;
+	printf("%d\n", n);
+	while (n!=0)
+	{
+		b[i] = n % k;
+		n /= k;
+		i++;
+	}
+	k = i-1;
+	for (i = 0; i <= k; i++) {
+		printf("%d:%d\n", i+1, b[i]);
+	}
+	return;
+}
+
+void b_and_s() {
+
+	int a = 18, b = 20;
+	int k = a * b;
+	int t = 1;
+	if (a < b) {
+		t = a;
+		a = b;
+		b = t;
+	}
+	//必须先交换，不然取余为0
+	//辗转相除法求最大公约数（欧几里得算法）
+	while (t != 0) {
+		t = a % b;
+		a = b;
+		b = t;
+	}
+	//两个数的乘积k = 最大公约数 * 最小公倍数
+	b = k / a;
+	printf("最大公约数:%d\n最小公倍数:%d\n",a,b);
+	return;
+}
+
+void bubble_sort() {
+	
+	int a[10] = { 4,2,5,1,4,6,9,0,7,4 };
+	int n = 10;
+	int i, j, t;
+	for (i = 0; i < n - 1; i++) {
+		//外循环一趟把最大值放在最右边，i控制最右边界
+		for (j = 0; j < n - i - 1; j++) {
+			if (a[j] > a[j + 1]) {
+				t = a[j];
+				a[j] = a[j + 1];
+				a[j + 1] = t;
+			}
+		}
+	}
+	for (i = 0; i < n; i++) {
+		printf("%d:%d\n", i, a[i]);
+	}
 	return;
 }
 
