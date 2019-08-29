@@ -8,7 +8,8 @@
 
 int main()
 {
-	void output(); //输出函数
+	//----基础----
+	/*void output(); //输出函数
 	void input();  //输入函数
 	void process_number_e(); //例子:处理一串数字
 	void process_string_e();//例子:处理字符串
@@ -16,20 +17,74 @@ int main()
 	void about_math();//数学相关函数
 	//ASCII 0-48 A-65 a-97
 	void about_struct();//结构体相关定义
-	void about_struct_e();//结构体例子
+	void about_struct_e();//结构体例子*/
 
 	//----常用小算法----
-	void find_prime();//*寻找素数
+	/*void find_prime();//*寻找素数
 	void prime_factorization();//**分解质因数
 	void approximate_number();//**约数
 	void statistical_number();//统计字母和数字出现个数
 	void positive_number();//统计正整数出现个数
 	void divide_number();//以进制分解数字
 	void b_and_s();//**求最大公约数和最小公倍数
-	void bubble_sort();//*冒泡排序
+	void bubble_sort();//*冒泡排序*/
 
+	//----习题----
 	
+	//P11[题型一]数组分类:将a[n]划分为左边为奇数，右边为偶数
+	/*int a[10] = { 1,2,3,4,5,6,7,8,9,10 },n=10;
+	void dwide(int a[], int n);*/
+
+	//[题型二]数组逆序:①将m*n二维数组首尾互换,例如+1 -1 +2 -2互换
+	/*int b[3][4] = { {0,1,2,3},{10,11,12,13},{20,21,22,23} };
+	void swapt(int a[3][4]);*/
+
+	//②将一维数组A[m+n]a1-am与b1-bn整体互换位置
+	/*
+	int c[11] = { 1,2,3,4,5,6,7,8,9,10,11 }, left_num = 5, right_num = 6, n = 11;
+	void reverse(int a[], int n);//颠倒数组
+	void print_ai(int a[], int n);//打印数组
 	
+	reverse(c,n);
+	reverse(c, right_num);
+	reverse(c+right_num, left_num);
+	print_ai(c, n);
+	*/
+
+	//③一个数组中有100个正整数，将所有偶数（奇数）从小到大排在前半部分（后半部分）
+	/*int aa[8] = { 1,4,3,2,5,9,7 };//输出 2 4 1 3 5 7 9
+	void sort(int a[],int n);
+	int n = 7; int i = 0, j = n - 1, p = 0, q = 0,temp;
+	//先划分好奇数偶数部分
+	while (i < j) {
+		//处理偶数
+		while (aa[i] % 2 == 0) {
+			i++;
+			p++;
+		}
+		//处理奇数
+		while (aa[j] % 2 != 0) {
+			j--;
+			q++;
+		}
+		if (i < j) {
+			temp = aa[i];
+			aa[i] = aa[j];
+			aa[j] = temp;
+		}
+	}
+	//再排序
+	sort(aa, p);
+	sort(aa+p, q);
+
+	print_ai(aa, n);
+
+	int test[10] = { 1,4,56,3,2,5,4,3,33 }; n = 9;
+	sort(test, n);
+	print_ai(test, n);
+	*/
+
+	//P12[题型三]
 
 
 	system("pause");
@@ -316,6 +371,102 @@ void bubble_sort() {
 	}
 	for (i = 0; i < n; i++) {
 		printf("%d:%d\n", i, a[i]);
+	}
+	return;
+}
+
+void dwide(int a[], int n) {
+	int i = 0, j = n - 1, temp;
+	while (i < j) {
+		while (a[i] % 2 != 0) {
+			i++;
+		}
+		while (a[j] % 2 != 1) {
+			j--;
+		}
+		//循环到需要左右交换的位置
+		if (i < j) {
+			temp = a[i];
+			a[i] = a[j];
+			a[j] = temp;
+		}
+	}
+	for (i = 0; i < n; i++) {
+		printf("%d ", a[i]);
+	}
+	printf("\n");
+	return;
+}
+
+void swapt(int a[3][4]) {
+	int m = 3, n = 4;
+	int i, j, temp;
+	for (i = 0; i < m; i++) {
+		for (j = 0; j < n; j++) {
+			printf(" %2d ", a[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+
+	for (i = 0; i < (m / 2); i++) {
+		//上半部分直接行列都互换
+		for (j = 0; j < n; j++) {
+			temp = a[i][j];
+			a[i][j] = a[m - i - 1][n - j - 1];
+			a[m - i - 1][n - j - 1] = temp;
+		}
+	}
+	//若奇数行则剩下中间一行单独处理
+	if (m % 2 != 0) {
+		for (j = 0; j < (n / 2); j++) {
+			temp = a[m / 2][j];
+			a[m / 2][j] = a[m / 2][n - j - 1];
+			a[m / 2][n - j - 1] = temp;
+		}
+	}
+
+	for (i = 0; i < m; i++) {
+		for (j = 0; j < n; j++) {
+			printf(" %2d ", a[i][j]);
+		}
+		printf("\n");
+	}
+
+	return;
+}
+
+void reverse(int a[], int n) {
+
+	int i, temp;
+	for (i = 0; i < (n / 2); i++) {
+		temp = a[i];
+		a[i] = a[n - i - 1];
+		a[n - i - 1] = temp;
+	}
+	return;
+}
+
+void print_ai(int a[], int n) {
+	int i;
+	printf("开始打印:\n");
+	for (i = 0; i < n; i++) {
+		printf("%d  ", a[i]);
+	}
+	printf("\n打印结束");
+}
+
+void sort(int a[], int n) {
+	int i,j,t;
+	for (i = 0; i < n - 1; i++) {
+		for (j = 0; j < n - i - 1; j++) {
+			//每一趟把最大的放在n-i-1的位置上，一直到有序
+			if (a[j] > a[j + 1]) {
+				t = a[j + 1];
+				a[j + 1] = a[j];
+				a[j] = t;
+			}
+		}
 	}
 	return;
 }
