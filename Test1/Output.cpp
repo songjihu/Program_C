@@ -5,91 +5,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-
-int main()
-{
-	//----基础----
-	/*void output(); //输出函数
-	void input();  //输入函数
-	void process_number_e(); //例子:处理一串数字
-	void process_string_e();//例子:处理字符串
-	void m_and_f();//申请和释放空间
-	void about_math();//数学相关函数
-	//ASCII 0-48 A-65 a-97
-	void about_struct();//结构体相关定义
-	void about_struct_e();//结构体例子*/
-
-	//----常用小算法----
-	/*void find_prime();//*寻找素数
-	void prime_factorization();//**分解质因数
-	void approximate_number();//**约数
-	void statistical_number();//统计字母和数字出现个数
-	void positive_number();//统计正整数出现个数
-	void divide_number();//以进制分解数字
-	void b_and_s();//**求最大公约数和最小公倍数
-	void bubble_sort();//*冒泡排序*/
-
-	//----习题----
-	
-	//P11[题型一]数组分类:将a[n]划分为左边为奇数，右边为偶数
-	/*int a[10] = { 1,2,3,4,5,6,7,8,9,10 },n=10;
-	void dwide(int a[], int n);*/
-
-	//[题型二]数组逆序:①将m*n二维数组首尾互换,例如+1 -1 +2 -2互换
-	/*int b[3][4] = { {0,1,2,3},{10,11,12,13},{20,21,22,23} };
-	void swapt(int a[3][4]);*/
-
-	//②将一维数组A[m+n]a1-am与b1-bn整体互换位置
-	/*
-	int c[11] = { 1,2,3,4,5,6,7,8,9,10,11 }, left_num = 5, right_num = 6, n = 11;
-	void reverse(int a[], int n);//颠倒数组
-	void print_ai(int a[], int n);//打印数组
-	
-	reverse(c,n);
-	reverse(c, right_num);
-	reverse(c+right_num, left_num);
-	print_ai(c, n);
-	*/
-
-	//③一个数组中有100个正整数，将所有偶数（奇数）从小到大排在前半部分（后半部分）
-	/*int aa[8] = { 1,4,3,2,5,9,7 };//输出 2 4 1 3 5 7 9
-	void sort(int a[],int n);
-	int n = 7; int i = 0, j = n - 1, p = 0, q = 0,temp;
-	//先划分好奇数偶数部分
-	while (i < j) {
-		//处理偶数
-		while (aa[i] % 2 == 0) {
-			i++;
-			p++;
-		}
-		//处理奇数
-		while (aa[j] % 2 != 0) {
-			j--;
-			q++;
-		}
-		if (i < j) {
-			temp = aa[i];
-			aa[i] = aa[j];
-			aa[j] = temp;
-		}
-	}
-	//再排序
-	sort(aa, p);
-	sort(aa+p, q);
-
-	print_ai(aa, n);
-
-	int test[10] = { 1,4,56,3,2,5,4,3,33 }; n = 9;
-	sort(test, n);
-	print_ai(test, n);
-	*/
-
-	//P12[题型三]
-
-
-	system("pause");
-}
-
 void output()
 {
 	//输出函数
@@ -122,7 +37,7 @@ void input()
 	printf("输入2:%s\n", str2);
 
 	char c;//字符
-	c=getchar();//接收单个字符
+	c = getchar();//接收单个字符
 	printf("输入3:%c\n", c);
 
 	return;
@@ -132,7 +47,7 @@ void process_number_e()
 {
 	int a[4], i, j;
 	for (i = 0; i < 4; i++) {
-		int t=scanf("%d", &a[i]);
+		int t = scanf("%d", &a[i]);
 	}
 	for (j = 0; j < 4; j++) {
 		printf("%d", a[j]);
@@ -141,8 +56,8 @@ void process_number_e()
 }
 
 void process_string_e() {
-	
-	char str[20] ="\0" ;
+
+	char str[20] = "\0";
 	printf("请输入字符串：\n");
 	gets_s(str);
 	printf("%s\n", str);
@@ -150,7 +65,7 @@ void process_string_e() {
 }
 
 void m_and_f() {
-	int *p = (int*)malloc(sizeof(int));
+	int* p = (int*)malloc(sizeof(int));
 	free(p);
 	return;
 }
@@ -177,11 +92,11 @@ void about_struct() {
 		int month;
 		int day;
 		int year;
-	}a,b;//方法1：定义结构体后并创建2个结构体变量a和b
+	}a, b;//方法1：定义结构体后并创建2个结构体变量a和b
 	a.day = 11;
 	Date c;//方法2：直接定义
 	c.day = 10;
-	printf("%d %d", a.day,c.day);
+	printf("%d %d", a.day, c.day);
 	return;
 }
 
@@ -218,7 +133,7 @@ void find_prime() {
 	//100以内
 	int i, j;
 	int length = 100;
-	int count=0;
+	int count = 0;
 	for (i = 2; i < length; i++)
 	{
 		for (j = 2; j <= i; j++) {
@@ -228,7 +143,7 @@ void find_prime() {
 		}
 		if (i == j) {
 			count++;
-			printf("%d:%d\n",count, i);
+			printf("%d:%d\n", count, i);
 		}
 	}
 	return;
@@ -240,7 +155,7 @@ void prime_factorization() {
 	int n = 5446547;
 	int k = n;
 	for (i = 2; i <= n; i++) {
-		while (n!=i)
+		while (n != i)
 		{
 			if (n % i == 0) {
 				printf("%d*", i);
@@ -251,7 +166,7 @@ void prime_factorization() {
 				break;
 			}
 		}
-		
+
 	}
 	printf("%d=%d\n", n, k);
 	return;
@@ -272,9 +187,9 @@ void approximate_number() {
 void statistical_number() {
 
 	char ch;
-	int digit=0, upper=0, lower=0;
+	int digit = 0, upper = 0, lower = 0;
 	ch = getchar();
-	while (ch!='\n')
+	while (ch != '\n')
 	{
 		if (ch >= '0' && ch <= '9') {
 			digit++;
@@ -318,15 +233,15 @@ void divide_number() {
 	int b[10] = { 0 };
 	int i = 0;
 	printf("%d\n", n);
-	while (n!=0)
+	while (n != 0)
 	{
 		b[i] = n % k;
 		n /= k;
 		i++;
 	}
-	k = i-1;
+	k = i - 1;
 	for (i = 0; i <= k; i++) {
-		printf("%d:%d\n", i+1, b[i]);
+		printf("%d:%d\n", i + 1, b[i]);
 	}
 	return;
 }
@@ -350,12 +265,12 @@ void b_and_s() {
 	}
 	//两个数的乘积k = 最大公约数 * 最小公倍数
 	b = k / a;
-	printf("最大公约数:%d\n最小公倍数:%d\n",a,b);
+	printf("最大公约数:%d\n最小公倍数:%d\n", a, b);
 	return;
 }
 
 void bubble_sort() {
-	
+
 	int a[10] = { 4,2,5,1,4,6,9,0,7,4 };
 	int n = 10;
 	int i, j, t;
@@ -457,7 +372,7 @@ void print_ai(int a[], int n) {
 }
 
 void sort(int a[], int n) {
-	int i,j,t;
+	int i, j, t;
 	for (i = 0; i < n - 1; i++) {
 		for (j = 0; j < n - i - 1; j++) {
 			//每一趟把最大的放在n-i-1的位置上，一直到有序
@@ -470,6 +385,143 @@ void sort(int a[], int n) {
 	}
 	return;
 }
+
+void move_zero(int a[], int n) {
+
+	int i, j, p;
+	for (i = 0; i < n; i++) {
+		if (a[i] == 0) {
+			//从当前位置向后寻找非0元素交换
+			for (j = i; j < n; j++) {
+				if (a[j] != 0) {
+					p = j;//找到则存下标并break
+					break;
+				}
+				if (j == (n - 1)) {
+					//循环完也没找到则表示完成移动
+					return;
+				}
+			}
+			//交换
+			a[i] = a[p];
+			a[p] = 0;
+		}
+	}
+	return;
+}
+
+int move_bettwen(int a[], int n, int x, int y) {
+
+	int i = 0, k = 0;
+	for (i = 0; i < n; i++) {
+		if (a[i] >= x && a[i] <= y) {
+			k++;//计算跳过的长度
+		}
+		else {
+			a[i - k] = a[i];//覆盖存储
+		}
+	}
+	return n-k;
+}
+
+int main()
+{
+	//----基础----
+	/*void output(); //输出函数
+	void input();  //输入函数
+	void process_number_e(); //例子:处理一串数字
+	void process_string_e();//例子:处理字符串
+	void m_and_f();//申请和释放空间
+	void about_math();//数学相关函数
+	//ASCII 0-48 A-65 a-97
+	void about_struct();//结构体相关定义
+	void about_struct_e();//结构体例子*/
+
+	//----常用小算法----
+	/*void find_prime();//*寻找素数
+	void prime_factorization();//**分解质因数
+	void approximate_number();//**约数
+	void statistical_number();//统计字母和数字出现个数
+	void positive_number();//统计正整数出现个数
+	void divide_number();//以进制分解数字
+	void b_and_s();//**求最大公约数和最小公倍数
+	void bubble_sort();//*冒泡排序*/
+
+	//----习题----
+	
+	//P11[题型一]数组分类:将a[n]划分为左边为奇数，右边为偶数
+	/*int a[10] = { 1,2,3,4,5,6,7,8,9,10 },n=10;
+	void dwide(int a[], int n);*/
+
+	//[题型二]数组逆序:①将m*n二维数组首尾互换,例如+1 -1 +2 -2互换
+	/*int b[3][4] = { {0,1,2,3},{10,11,12,13},{20,21,22,23} };
+	void swapt(int a[3][4]);*/
+
+	//②将一维数组A[m+n]a1-am与b1-bn整体互换位置
+	/*
+	int c[11] = { 1,2,3,4,5,6,7,8,9,10,11 }, left_num = 5, right_num = 6, n = 11;
+	void reverse(int a[], int n);//颠倒数组
+	void print_ai(int a[], int n);//打印数组
+	
+	reverse(c,n);
+	reverse(c, right_num);
+	reverse(c+right_num, left_num);
+	print_ai(c, n);
+	*/
+
+	//③一个数组中有100个正整数，将所有偶数（奇数）从小到大排在前半部分（后半部分）
+	/*int aa[8] = { 1,4,3,2,5,9,7 };//输出 2 4 1 3 5 7 9
+	void sort(int a[],int n);
+	int n = 7; int i = 0, j = n - 1, p = 0, q = 0,temp;
+	//先划分好奇数偶数部分
+	while (i < j) {
+		//处理偶数
+		while (aa[i] % 2 == 0) {
+			i++;
+			p++;
+		}
+		//处理奇数
+		while (aa[j] % 2 != 0) {
+			j--;
+			q++;
+		}
+		if (i < j) {
+			temp = aa[i];
+			aa[i] = aa[j];
+			aa[j] = temp;
+		}
+	}
+	//再排序
+	sort(aa, p);
+	sort(aa+p, q);
+
+	print_ai(aa, n);
+
+	int test[10] = { 1,4,56,3,2,5,4,3,33 }; n = 9;
+	sort(test, n);
+	print_ai(test, n);
+	*/
+
+	//P12[题型三]数组排序:①将2个有序数组合并为1个有序数组 略
+	
+	//②从大小为15的有序数组中使用折半查找找出下标 略
+	
+	//P13[题型三]平台问题:①从一维数组中求最长平台长度 略 ② 同 略
+
+	//P14[题型四]特殊值:①从一维数组中移动特殊值到尾部,且其他值次序不变
+	/*int a[8] = {7,0,0,3,0,5,0},n=7;
+	move_zero(a, n);
+	print_ai(a, n);*/
+
+	//②在一维数组中移位删属于特定区间的(<=y&&>=x)元素,返回删除后元素个数
+	/*int a[8] = { 1,2,3,4,5,6,7 },n=7;
+	print_ai(a, move_bettwen(a, n, 2, 4));*/
+
+
+	system("pause");
+}
+
+
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单
