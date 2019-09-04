@@ -371,6 +371,15 @@ void print_ai(int a[], int n) {
 	printf("\n打印结束");
 }
 
+void print_ai_s(char a[], int n) {
+	int i;
+	printf("开始打印:\n");
+	for (i = 0; i < n; i++) {
+		printf("%c  ", a[i]);
+	}
+	printf("\n打印结束");
+}
+
 void sort(int a[], int n) {
 	int i, j, t;
 	for (i = 0; i < n - 1; i++) {
@@ -422,6 +431,94 @@ int move_bettwen(int a[], int n, int x, int y) {
 		}
 	}
 	return n-k;
+}
+
+void del_same(int a[], int n) {
+
+	int i=0, j, k=0;
+	while (i < n) {
+		for (j = i + 1; j < n; j++) {
+			if (a[i] == a[j]) {
+				k++;//连续重复个数k
+			}
+			else {
+				//移动到连续相同序列的第一个的后边
+				a[j - k] = a[j];
+			}
+		}
+		i++;
+		k = 0;
+	}
+	return;
+}
+
+int is_prime(int x) {
+
+	if (x == 1) {
+		return 0;
+	}
+	int i;
+	for (i = 2; i < x; i++) {
+		if (x % i == 0 && x != i) {
+			//找到不是可以整除他的且不是本身的数
+			return 0;
+		}
+	}
+	return 1;
+}
+
+int del_sushu(int a[], int n) {
+
+	int i, j, num = n;
+	for (i = 0; i < num; i++) {
+		if (is_prime(a[i])) {
+			for (j = i; j < num - 1; j++) {
+				a[j] = a[j + 1];//前移每一个后边的数
+			}
+			i--;//保持i为原位置
+			num--;//数组总数减一
+		}
+	}
+	return num;
+}
+
+void sort_string(char a[], int n) {
+
+	int i, j, temp;
+	//冒泡排序
+	for (i = 0; i < n; i++) {
+		for (j = 0; j < n - i - 1;j++) {
+			if (a[j] > a[j+1]) {
+				temp = a[j + 1];
+				a[j + 1] = a[j];
+				a[j] = temp;
+			}
+		}
+	}
+	return;
+}
+
+int merge_two(int a[], int m, int b[], int n) {
+
+	int i = 0, j = 0, k, len = m;
+	for (j = 0; j < n; j++) {
+		//for循环第二个数组
+		while (i < len && a[i] < b[j]) {
+			//移动到比a[i]小的b[j]处准备插入
+			i++;
+		}
+		if (a[i] == b[j]) {
+			//相同则忽略
+			continue;
+		}
+		for (k = len; k > i; k--) {
+			//插入前依次后移
+			a[k] = a[k - 1];
+		}
+		a[i] = b[j];//插入
+		len++;
+	}
+	return len;
 }
 
 int main()
@@ -517,6 +614,33 @@ int main()
 	/*int a[8] = { 1,2,3,4,5,6,7 },n=7;
 	print_ai(a, move_bettwen(a, n, 2, 4));*/
 
+	//③ 同① 略
+
+	//④删除数组中重复的元素，并将剩余的元素移到前边
+	/*int a[8] = { 1,1,2,3,4,4,1 },n=7;
+	del_same(a, n);
+	print_ai(a, n);*/
+
+	//⑤10乘10二维数组中每行最大元素构成向量B，每列最小元素构成向量C，求B·C 略
+
+	//⑥判定在一维数组a中是否存在a[i]等于前i-1个元素之和 略
+
+	//⑦删除一维数组中所有素数（保持次序，无新数组，打印处理后数组，返回剩余元素个数）
+	/*int a[8] = { 1,2,3,4,5,6,7 } ,n = 7,t;
+	t=del_sushu(a, n);
+	print_ai(a, t);*/
+
+	//⑧对字符串中所有字符按照ASCII码递增排序
+	/*char a[8] = { 'd','a','c','b','f','e','h' }, n = 7;
+	sort_string(a, n);
+	print_ai_s(a, n);*/
+
+	//⑨合并2个严格增序数组a b到a，且不另设数组，返回a的元素个数
+	/*int a[8] = { 1,2,3 }, m = 3, b[4] = { 3,4,5 }, n = 3, t;
+	t = merge_two(a, m, b, n);
+	print_ai(a, t);*/
+
+	//⑩使用数组精确计算M/N各小数位值，若无限循环则输出循环节和起始位置
 
 	system("pause");
 }
