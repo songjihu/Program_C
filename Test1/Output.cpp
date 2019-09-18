@@ -521,6 +521,51 @@ int merge_two(int a[], int m, int b[], int n) {
 	return len;
 }
 
+void M_and_N(int a[], int m, int n, int start, int end)
+{
+
+	int i, j, temp, startplace=0, endplace=0,multiplier[100];
+	for (i = 1; i < 100; i++) {
+		//进行100次除法
+		multiplier[i] = (m * 10) / n;//保存乘数
+		temp = m*10;
+		m = (m * 10) % n;//m覆盖为余数
+		printf("%d/%d=%d余%d\n", temp,n,multiplier[i],m);
+		if (m == 0 || a[m]) {
+			//若余数为0，或者，余数已经是第二次出现，则结束
+			if (a[m]) {
+				startplace = a[m];//存入开始i
+			}
+			endplace = i;//存入无限循环的结束i
+			break;
+		}
+		//printf(" %d ", m);
+		a[m] = i;//否则在余数大小的位置存入是在第几次得到的
+	}
+	printf("\n输出：0.");
+	for (i = 1; i < endplace; i++) {
+		//循环a[100]的每一个位置,按循环次序从小到大打印小数部分
+		//循环次序i
+		printf("%d", multiplier[i]);//打印小数
+		//从余数来判断开始结束的小数位
+		for (j = 1; j < 100; j++) {
+			if (a[j] == i) {
+				//开始位置之前
+				if (i <= startplace) {
+					start++;
+					end = start;
+				}
+				else {
+					end++;
+					//结束序号
+				}
+			}
+		}
+	}
+	printf("\n无限循环开始于%d结束于%d", start+1, end);
+	return;
+}
+
 int main()
 {
 	//----基础----
@@ -640,7 +685,10 @@ int main()
 	t = merge_two(a, m, b, n);
 	print_ai(a, t);*/
 
-	//⑩使用数组精确计算M/N各小数位值，若无限循环则输出循环节和起始位置
+	//⑩使用数组精确计算M/N各小数位值(M<N)，若无限循环则输出循环节和起始位置(未完)
+	/*int a[100] = { 0 }, start=0, end=0, m=5, n=95;
+	M_and_N(a, m, n, start, end);*/
+
 
 	system("pause");
 }
