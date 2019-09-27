@@ -362,7 +362,10 @@ void print_ai(int a[], int n) {
 	int i;
 	printf("开始打印:\n");
 	for (i = 0; i < n; i++) {
-		printf("%d  ", a[i]);
+		printf("%d:%3d  ", i+1,a[i]);
+		if (i % 10 == 9) {
+			printf("\n");
+		}
 	}
 	printf("\n打印结束");
 }
@@ -393,7 +396,7 @@ void sort(int a[], int n) {
 
 void move_zero(int a[], int n) {
 
-	int i, j, p;
+	int i, j, p=0;
 	for (i = 0; i < n; i++) {
 		if (a[i] == 0) {
 			//从当前位置向后寻找非0元素交换
@@ -763,5 +766,133 @@ void harmonic_series(int n) {
 	a = a / e;
 	//化简后输出
 	printf("%d/%d\n", b, a);
+	return;
+}
+
+int insert_to_M(int* a, int x, int count) {
+	
+	//插入一个整数insert到有序的整数一维数组中
+	int i = 0, j = -1;
+	for (i = 0; i < count; i++) {
+		if (x > a[i] && x < a[i + 1]) {
+			for (j = count; j > i; j--) {
+				a[j + 1] = a[j];
+			}
+			a[i + 1] = x;
+			count++;
+			return count;
+		}
+	}
+	if (i == count && j == -1) {
+		a[count] = x;
+		count++;
+		return count;
+	}
+	return count;
+}
+
+void m_100() {
+
+	int a[210], n = 0, y = 0, z = 0, i = 0, count = 1;
+	a[0] = 1;
+	n = 1;
+	for (i = 0; i < 100; i++) {
+		y = a[i] * 2 + 1;
+		z = a[i] * 3 + 1;
+		count = insert_to_M(a, y, count);
+		count = insert_to_M(a, z, count);
+	}
+	print_ai(a, 100);
+	return;
+}
+
+void out_subset(int n) {
+	//输出子集(背)
+	
+	int m = 0, i = 0, j = 0, k = 0;
+	m = pow(2, n);//计算2的n次幂
+	for (i = 0; i < m; i++) {
+		printf("{");
+		j = i;
+		k = 0;
+		while (j != 0) {
+			if (j % 2 != 0) {
+				//j为偶数则跳过
+				printf(" %d", k);
+			}
+			k++;
+			j = j / 2;
+		}
+		printf(" }\n");
+	}
+	return;
+}
+
+void trans_sixteen_ten(char* array,int n) {
+	//16-10进制
+
+	int i = 0, sum = 0;
+	for (i = 0; i <= n - 1; i++) {
+		if (array[i] >= '0' && array[i] <= '9') {
+			sum = sum * 16 + array[i] - '0';
+		}
+		else
+		{
+			if (array[i] >= 'A' && array[i] <= 'F') {
+				sum = sum * 16 + array[i] - 'A' + 10;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+	printf("\n%d\n",sum);
+	return;
+}
+
+void trans_ten_two(int n) {
+	//10-2进制
+
+	int a[10] = { 0 }, i = 0;
+	if (n != 0) {
+		while (n != 1) {
+			a[i] = n % 2;
+			n = n / 2;
+			i++;
+		}
+		a[i] = 1;
+		reverse(a, i + 1);
+		print_ai(a, i + 1);
+	}
+	else
+	{
+		a[i] = 0;
+		return;
+	}
+	return;
+}
+
+int multiplicative(int n) {
+	//累乘求 n!
+	int i = 1, c = 1;
+	for (i = 1; i <= n; i++) {
+		c = c * i;
+	}
+	return c;
+}
+
+void taylor_sin(double x) {
+	//用泰勒公式求误差小于0.00005的sin(x)近似值
+
+	int i, sign = 1;
+	double term = x, s = 0;
+	for (i = 1; term > 1e-8; i += 2) {
+		//一直到term小于10的-8次方停止循环
+		term = pow(x, i) / multiplicative(i);//term=x的i次方/i!
+		s = s + term * sign;
+		sign = -sign;
+	}
+	printf("sin(%10.8lf)结果为:%10.8lf\n", x, s);
 	return;
 }
