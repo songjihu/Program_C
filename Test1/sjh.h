@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #pragma once
+#include<math.h>
 
 void output()
 {
@@ -896,3 +897,110 @@ void taylor_sin(double x) {
 	printf("sin(%10.8lf)结果为:%10.8lf\n", x, s);
 	return;
 }
+
+
+struct point
+{
+	//平面上点的坐标
+	double x;
+	double y;
+};
+
+float area(double m, double n, double t)
+{
+	printf("%lf,%lf,%lf\n", m,n,t);
+	//用海伦公式带入三边长度求面积
+	double p, S, temp;
+	p = (m + n + t) / 2;
+	temp = p * (p - m) * (p - n) * (p - t);
+	S = sqrt(temp);
+	//printf("%lf", temp);
+	return S;
+}
+
+void is_in_triangle()
+{
+	//有误差
+	int t;
+	struct point a, b, c, d;//定义点ABCD
+	float AB, BC, AC;//三角形各边长度
+	float S0, S1, S2, S3;//S0为总面积，其他为D与三点形成的小三角形面积
+	float DA, DB, DC;//D与另外3点的连线长度
+	printf("请输入A点坐标:\n");
+	t = scanf("%lf", &a.x);
+	t = scanf("%lf", &a.y);
+	printf("A(%lf,%lf)\n",a.x,a.y);
+
+	printf("请输入B点坐标:\n");
+	t = scanf("%lf", &b.x);
+	t = scanf("%lf", &b.y);
+	printf("B(%lf,%lf)\n", b.x, b.y);
+
+	printf("请输入C点坐标:\n");
+	t = scanf("%lf", &c.x);
+	t = scanf("%lf", &c.y);
+	printf("C(%lf,%lf)\n", c.x, c.y);
+
+	AB = (float)sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+	BC = (float)sqrt((b.x - c.x) * (b.x - c.x) + (b.y - c.y) * (b.y - c.y));
+	AC = (float)sqrt((a.x - c.x) * (a.x - c.x) + (a.y - c.y) * (a.y - c.y));
+	if ((AB + BC) > AC && (AB + AC) > BC && (AC + BC) > AB) {
+		printf("请输入D点坐标:\n");
+		t = scanf("%lf", &d.x);
+		t = scanf("%lf", &d.y);
+		DA = (float)sqrt((d.x - a.x) * (d.x - a.x) + (d.y - a.y) * (d.y - a.y));
+		DB = (float)sqrt((d.x - b.x) * (d.x - b.x) + (d.y - b.y) * (d.y - b.y));
+		DC = (float)sqrt((d.x - c.x) * (d.x - c.x) + (d.y - c.y) * (d.y - c.y));
+		S0 = area(AB, BC, AC);
+		S1 = area(DA, DB, AB);
+		S2 = area(DA, DC, AC);
+		S3 = area(DB, DC, BC);
+		printf("S0=%f\n", S0);
+		printf("S1=%f\n", S1);
+		printf("S2=%f\n", S2);
+		printf("S3=%f\n", S3);
+		if (S1 + S2 + S3 - S0 <= 0.0001)
+			printf("点D位于三角形内部\n");
+		else
+			printf("点D位于三角形外部\n S1+S2+S3-S0=%lf \n", S1 + S2 + S3 - S0);
+	}
+	else
+		printf("不能构成三角形！");
+}
+
+double dich_asist(double x) {
+	return 2 * x * x * x - 4 * x * x + 3 * x - 6;
+}
+
+void dichotomy() {
+	//二分法求特定方程解
+	const double eps = 1e-6;//定义常量
+	double m = -10, n = 10;//左右边界
+	double i, s, k;
+	while (fabs(m-n)>eps)
+	{
+		//当左右不相等时循环
+		i = (m + n) / 2;
+		s = dich_asist(i);
+		if (fabs(s) <= eps) {
+			break;//恰好找到s=0的点则break
+		}
+		else
+		{
+			if (dich_asist(i)* dich_asist(m)<eps)
+			{
+				//中间点和左边界异号则替换右边界为i
+				n = i;
+			}
+			else
+			{
+				//死循环？
+				m = i;
+			}
+		}
+	}
+
+	printf("解：x=%lf\n", (m + n) / 2);
+	return;
+}
+
